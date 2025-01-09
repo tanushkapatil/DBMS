@@ -1,0 +1,18 @@
+mysql> create database college ;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> use college ;
+Database changed
+mysql> create table student(roll_num integer(10) , name varchar(10) , phone integer(10));
+Query OK, 0 rows affected, 2 warnings (0.52 sec)
+
+mysql> insert into student values(1 , 'xyz', 1234567890);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from student ;
++----------+------+------------+
+| roll_num | name | phone      |
++----------+------+------------+
+|        1 | xyz  | 1234567890 |
++----------+------+------------+
+1 row in set (0.00 sec)
