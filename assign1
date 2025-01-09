@@ -16,3 +16,18 @@ mysql> select * from student ;
 |        1 | xyz  | 1234567890 |
 +----------+------+------------+
 1 row in set (0.00 sec)
+
+mysql> insert into student values(2 , 'uvw', 0123456789);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into student values(2 , 'pqr', 9876543210);
+ERROR 1264 (22003): Out of range value for column 'phone' at row 1
+mysql> select * from student ;
++----------+------+------------+
+| roll_num | name | phone      |
++----------+------+------------+
+|        1 | xyz  | 1234567890 |
+|        2 | uvw  |  123456789 |
++----------+------+------------+
+2 rows in set (0.00 sec)
+
