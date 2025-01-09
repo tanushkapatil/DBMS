@@ -1,3 +1,17 @@
+pccoe@pc-15:~$ sudo mysql
+[sudo] password for pccoe: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.40-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
 mysql> create database college ;
 Query OK, 1 row affected (0.11 sec)
 
