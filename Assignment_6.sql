@@ -23,7 +23,7 @@ mysql> CREATE TABLE Customers (
     ->     email VARCHAR(100) UNIQUE NOT NULL,
     ->     city VARCHAR(100) NOT NULL
     -> );
-Query OK, 0 rows affected (0.04 sec)
+Query OK, 0 rows affected (0.02 sec)
 
 mysql> 
 mysql> CREATE TABLE Orders (
@@ -62,7 +62,7 @@ mysql> CREATE TABLE Sellers (
     ->     seller_name VARCHAR(100) NOT NULL,
     ->     city VARCHAR(100) NOT NULL
     -> );
-Query OK, 0 rows affected (0.02 sec)
+Query OK, 0 rows affected (0.01 sec)
 
 mysql> 
 mysql> CREATE TABLE Product_Sellers (
@@ -75,6 +75,8 @@ mysql> CREATE TABLE Product_Sellers (
     -> );
 Query OK, 0 rows affected (0.02 sec)
 
+mysql> 
+mysql> 
 mysql> INSERT INTO Customers (customer_id, name, email, city) VALUES
     -> (1, 'Aarav Sharma', 'aarav.sharma@example.com', 'Pune'),
     -> (2, 'Ishita Verma', 'ishita.verma@example.com', 'Mumbai'),
@@ -98,25 +100,27 @@ mysql> SELECT * FROM Customers;
 
 mysql> 
 mysql> INSERT INTO Orders (order_id, customer_id, order_date, total_amount) VALUES
-    -> (101, 1, '2025-03-01', 500.00),
-    -> (102, 2, '2025-03-05', 1200.00),
-    -> (103, 3, '2025-02-20', 750.00),
-    -> (104, 1, '2025-03-10', 300.00),
-    -> (105, 4, '2025-01-15', 450.00);
-Query OK, 5 rows affected (0.00 sec)
-Records: 5  Duplicates: 0  Warnings: 0
+    -> (101, 1, '2023-03-15', 500.00),
+    -> (102, 2, '2023-06-10', 1200.00),
+    -> (103, 3, '2023-12-25', 750.00),
+    -> (104, 1, '2024-01-05', 300.00),
+    -> (105, 2, '2024-02-14', 450.00),
+    -> (106, 3, '2024-05-20', 600.00);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM Orders;
+mysql> SELECT * FROM Orders; 
 +----------+-------------+------------+--------------+
 | order_id | customer_id | order_date | total_amount |
 +----------+-------------+------------+--------------+
-|      101 |           1 | 2025-03-01 |       500.00 |
-|      102 |           2 | 2025-03-05 |      1200.00 |
-|      103 |           3 | 2025-02-20 |       750.00 |
-|      104 |           1 | 2025-03-10 |       300.00 |
-|      105 |           4 | 2025-01-15 |       450.00 |
+|      101 |           1 | 2023-03-15 |       500.00 |
+|      102 |           2 | 2023-06-10 |      1200.00 |
+|      103 |           3 | 2023-12-25 |       750.00 |
+|      104 |           1 | 2024-01-05 |       300.00 |
+|      105 |           2 | 2024-02-14 |       450.00 |
+|      106 |           3 | 2024-05-20 |       600.00 |
 +----------+-------------+------------+--------------+
-5 rows in set (0.00 sec)
+6 rows in set (0.00 sec)
 
 mysql> 
 mysql> INSERT INTO Products (product_id, product_name, category, price) VALUES
@@ -214,14 +218,16 @@ mysql> SELECT c.*, o.*
 +-------------+---------------+---------------------------+--------+----------+-------------+------------+--------------+
 | customer_id | name          | email                     | city   | order_id | customer_id | order_date | total_amount |
 +-------------+---------------+---------------------------+--------+----------+-------------+------------+--------------+
-|           1 | Aarav Sharma  | aarav.sharma@example.com  | Pune   |      101 |           1 | 2025-03-01 |       500.00 |
-|           1 | Aarav Sharma  | aarav.sharma@example.com  | Pune   |      104 |           1 | 2025-03-10 |       300.00 |
-|           2 | Ishita Verma  | ishita.verma@example.com  | Mumbai |      102 |           2 | 2025-03-05 |      1200.00 |
-|           3 | Kabir Singh   | kabir.singh@example.com   | Nagpur |      103 |           3 | 2025-02-20 |       750.00 |
-|           4 | Riya Malhotra | riya.malhotra@example.com | Pune   |      105 |           4 | 2025-01-15 |       450.00 |
+|           1 | Aarav Sharma  | aarav.sharma@example.com  | Pune   |      101 |           1 | 2023-03-15 |       500.00 |
+|           1 | Aarav Sharma  | aarav.sharma@example.com  | Pune   |      104 |           1 | 2024-01-05 |       300.00 |
+|           2 | Ishita Verma  | ishita.verma@example.com  | Mumbai |      102 |           2 | 2023-06-10 |      1200.00 |
+|           2 | Ishita Verma  | ishita.verma@example.com  | Mumbai |      105 |           2 | 2024-02-14 |       450.00 |
+|           3 | Kabir Singh   | kabir.singh@example.com   | Nagpur |      103 |           3 | 2023-12-25 |       750.00 |
+|           3 | Kabir Singh   | kabir.singh@example.com   | Nagpur |      106 |           3 | 2024-05-20 |       600.00 |
+|           4 | Riya Malhotra | riya.malhotra@example.com | Pune   |     NULL |        NULL | NULL       |         NULL |
 |           5 | Arjun Mehta   | arjun.mehta@example.com   | Delhi  |     NULL |        NULL | NULL       |         NULL |
 +-------------+---------------+---------------------------+--------+----------+-------------+------------+--------------+
-6 rows in set (0.00 sec)
+8 rows in set (0.00 sec)
 
 mysql> 
 mysql> SELECT o.order_id, p.product_name, oi.quantity
@@ -233,9 +239,9 @@ mysql> SELECT o.order_id, p.product_name, oi.quantity
 +----------+------------------+----------+
 |      101 | Gaming Laptop    |        1 |
 |      101 | Wireless Earbuds |        2 |
-|      104 | Smartwatch       |        1 |
 |      102 | Ergonomic Chair  |        1 |
 |      103 | Drawing Pad      |        5 |
+|      104 | Smartwatch       |        1 |
 +----------+------------------+----------+
 5 rows in set (0.00 sec)
 
@@ -248,9 +254,9 @@ mysql> SELECT c.customer_id, COUNT(o.order_id) AS total_orders
 | customer_id | total_orders |
 +-------------+--------------+
 |           1 |            2 |
-|           2 |            1 |
-|           3 |            1 |
-|           4 |            1 |
+|           2 |            2 |
+|           3 |            2 |
+|           4 |            0 |
 |           5 |            0 |
 +-------------+--------------+
 5 rows in set (0.00 sec)
@@ -273,15 +279,7 @@ mysql> SELECT o.order_id, c.name, o.total_amount
     -> FROM Orders o
     -> JOIN Customers c ON o.customer_id = c.customer_id
     -> WHERE o.order_date >= CURDATE() - INTERVAL 30 DAY;
-+----------+--------------+--------------+
-| order_id | name         | total_amount |
-+----------+--------------+--------------+
-|      101 | Aarav Sharma |       500.00 |
-|      102 | Ishita Verma |      1200.00 |
-|      103 | Kabir Singh  |       750.00 |
-|      104 | Aarav Sharma |       300.00 |
-+----------+--------------+--------------+
-4 rows in set (0.00 sec)
+Empty set (0.00 sec)
 
 mysql> 
 mysql> SELECT s.seller_name
@@ -295,12 +293,13 @@ mysql> SELECT c.*
     -> FROM Customers c
     -> LEFT JOIN Orders o ON c.customer_id = o.customer_id
     -> WHERE o.order_id IS NULL;
-+-------------+-------------+-------------------------+-------+
-| customer_id | name        | email                   | city  |
-+-------------+-------------+-------------------------+-------+
-|           5 | Arjun Mehta | arjun.mehta@example.com | Delhi |
-+-------------+-------------+-------------------------+-------+
-1 row in set (0.00 sec)
++-------------+---------------+---------------------------+-------+
+| customer_id | name          | email                     | city  |
++-------------+---------------+---------------------------+-------+
+|           4 | Riya Malhotra | riya.malhotra@example.com | Pune  |
+|           5 | Arjun Mehta   | arjun.mehta@example.com   | Delhi |
++-------------+---------------+---------------------------+-------+
+2 rows in set (0.00 sec)
 
 mysql> 
 mysql> SELECT *
@@ -309,8 +308,8 @@ mysql> SELECT *
 +----------+-------------+------------+--------------+
 | order_id | customer_id | order_date | total_amount |
 +----------+-------------+------------+--------------+
-|      102 |           2 | 2025-03-05 |      1200.00 |
-|      103 |           3 | 2025-02-20 |       750.00 |
+|      102 |           2 | 2023-06-10 |      1200.00 |
+|      103 |           3 | 2023-12-25 |       750.00 |
 +----------+-------------+------------+--------------+
 2 rows in set (0.00 sec)
 
@@ -323,8 +322,10 @@ mysql> SELECT customer_id
 | customer_id |
 +-------------+
 |           1 |
+|           2 |
+|           3 |
 +-------------+
-1 row in set (0.00 sec)
+3 rows in set (0.00 sec)
 
 mysql> 
 mysql> SELECT p.product_name, SUM(oi.quantity) AS total_quantity
@@ -414,7 +415,7 @@ mysql> SELECT c.name, SUM(o.total_amount) AS total_spent
 +--------------+-------------+
 | name         | total_spent |
 +--------------+-------------+
-| Ishita Verma |     1200.00 |
+| Ishita Verma |     1650.00 |
 +--------------+-------------+
 1 row in set (0.00 sec)
 
@@ -479,15 +480,14 @@ mysql> SELECT c.*
     -> SELECT c.*
     -> FROM Customers c
     -> WHERE c.city IN (SELECT city FROM Sellers);
-+-------------+---------------+---------------------------+--------+
-| customer_id | name          | email                     | city   |
-+-------------+---------------+---------------------------+--------+
-|           1 | Aarav Sharma  | aarav.sharma@example.com  | Pune   |
-|           2 | Ishita Verma  | ishita.verma@example.com  | Mumbai |
-|           3 | Kabir Singh   | kabir.singh@example.com   | Nagpur |
-|           4 | Riya Malhotra | riya.malhotra@example.com | Pune   |
-+-------------+---------------+---------------------------+--------+
-4 rows in set (0.00 sec)
++-------------+--------------+--------------------------+--------+
+| customer_id | name         | email                    | city   |
++-------------+--------------+--------------------------+--------+
+|           1 | Aarav Sharma | aarav.sharma@example.com | Pune   |
+|           2 | Ishita Verma | ishita.verma@example.com | Mumbai |
+|           3 | Kabir Singh  | kabir.singh@example.com  | Nagpur |
++-------------+--------------+--------------------------+--------+
+3 rows in set (0.00 sec)
 
 mysql> 
 mysql> SELECT customer_id
@@ -497,6 +497,12 @@ mysql> SELECT customer_id
     -> SELECT customer_id
     -> FROM Orders
     -> WHERE YEAR(order_date) = 2024;
-Empty set (0.00 sec)
-
++-------------+
+| customer_id |
++-------------+
+|           1 |
+|           2 |
+|           3 |
++-------------+
+3 rows in set (0.00 sec)
 
